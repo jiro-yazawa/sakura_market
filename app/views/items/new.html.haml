@@ -1,0 +1,16 @@
+%h1 商品登録画面
+
+= simple_form_for @item do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :name
+    = f.input :image
+    = f.input :price
+    = f.input :description
+    = f.input :hidden
+    = f.input :display_order
+
+  .form-actions
+    = f.button :submit
