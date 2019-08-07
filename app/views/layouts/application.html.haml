@@ -21,7 +21,11 @@
           %li.nav-item
             = link_to "ショッピングカート", "#", {class: "nav-link"}
           %li.nav-item
-            = link_to "ログアウト", "#", {class: "nav-link"}
+            = link_to "商品を登録する", new_item_path, {class: "nav-link"}
+          %li.nav-item
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
     .container
+      - if notice.present?
+        %p.notice= notice
     = yield
 
