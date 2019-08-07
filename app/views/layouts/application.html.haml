@@ -8,7 +8,20 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand さくらマーケット
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-yellowgreen
+      = link_to "さくらマーケット", "#", {class: "navbar-brand"} 
+      %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarNav"}, aria: {controls: "navbarNav", expanded: "false", label: "Toggle navigation"}}
+        %span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        %ul.navbar-nav
+          %li.nav-item
+            = link_to "日記を見る", "#", {class: "nav-link"}
+          %li.nav-item
+            = link_to "お買い物", "#", {class: "nav-link"}
+          %li.nav-item
+            = link_to "ショッピングカート", "#", {class: "nav-link"}
+          %li.nav-item
+            = link_to "ログアウト", "#", {class: "nav-link"}
     .container
     = yield
+
