@@ -17,15 +17,20 @@
           %li.nav-item
             = link_to "日記を見る", "#", {class: "nav-link"}
           %li.nav-item
-            = link_to "お買い物", "#", {class: "nav-link"}
-          %li.nav-item
-            = link_to "ショッピングカート", "#", {class: "nav-link"}
-          %li.nav-item
-            = link_to "商品を登録する", new_item_path, {class: "nav-link"}
-          %li.nav-item
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
-    .container
+            = link_to "お買い物", items_path, {class: "nav-link"}
+          - if current_user
+            %li.nav-item
+              = link_to "ショッピングカート", cart_path, class: "nav-link"
+            %li.nav-item
+              = link_to "商品を登録する", new_item_path, {class: "nav-link"}
+            %li.nav-item
+              = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
+          - else
+            %li.nav-item
+              = link_to "ログイン", new_user_session_path, class: "nav-link"
+    .container-fluid
       - if notice.present?
-        %p.notice= notice
+        %p.alert.alert-success{role: "alert"}= notice
+      - if alert.present?
+        %p.alert.alert.alert-warning{role: "alert"}= alert
       = yield
-

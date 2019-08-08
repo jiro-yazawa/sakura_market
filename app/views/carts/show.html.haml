@@ -1,0 +1,17 @@
+
+.mb-3
+%table.table.table-hover
+  %thead.thead-default
+    %tr
+      %th= Item.human_attribute_name(:name)
+      %th= Item.human_attribute_name(:price)
+      %th= Cart.human_attribute_name(:quantity)
+      %th
+  %tbody
+    - @cart.cart_items.each do |item|
+      %tr
+        %td= link_to item.item.name, item_path(item.item_id)
+        %td= item.item.price
+        %td= item.quantity
+        %td= link_to '削除', delete_item_path(item_id: item.item_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
+= link_to "注文内容を確認する", confirm_purchase_path, class: "btn btn-primary btn-lg btn-block"

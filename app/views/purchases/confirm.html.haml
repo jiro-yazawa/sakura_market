@@ -1,0 +1,37 @@
+%h1 注文確認画面
+
+.mb-3
+%table.table.table-hover
+  %thead.thead-default
+    %tr
+      %th= Item.human_attribute_name(:name)
+      %th= Item.human_attribute_name(:price)
+      %th= Cart.human_attribute_name(:quantity)
+  %tbody
+    - @cart.cart_items.each do |item|
+      %tr
+        %td= link_to item.item.name, item_path(item.item_id)
+        %td= item.item.price
+        %td= item.quantity
+    %tr
+      %td 小計
+      %td= cart_items_subtotal
+      %td
+      %td
+    %tr
+      %td 送料
+      %td 0
+      %td
+      %td
+    %tr
+      %td 代引き手数料
+      %td 0
+      %td
+      %td
+    %tr
+      %td 合計
+      %td= cart_items_subtotal
+      %td
+      %td
+
+= button_to "注文を確定する", purchase_path, class: "btn btn-primary btn-lg btn-block"

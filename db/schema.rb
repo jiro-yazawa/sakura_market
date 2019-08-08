@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_024127) do
+ActiveRecord::Schema.define(version: 2019_08_08_102459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "added_items", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "item_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_added_items_on_cart_id"
+    t.index ["item_id"], name: "index_added_items_on_item_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.text "location"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "item_id"
+    t.integer "quantity"
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["item_id"], name: "index_cart_items_on_item_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -22,6 +52,21 @@ ActiveRecord::Schema.define(version: 2019_08_07_024127) do
     t.text "description"
     t.boolean "hidden"
     t.integer "display_order"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "user_name", null: false
+    t.text "user_location"
+    t.integer "total_fee", default: 0
+    t.integer "subtotal", default: 0
+    t.integer "tax_fee", default: 0
+    t.datetime "created_at", default: "2019-08-08 09:28:21"
+    t.integer "cash_on_delivery", default: 0
+    t.integer "delivery_fee", default: 0
+    t.datetime "delivery_date"
+    t.string "delivery_timezone"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +80,10 @@ ActiveRecord::Schema.define(version: 2019_08_07_024127) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "added_items", "carts"
+  add_foreign_key "added_items", "items"
+  add_foreign_key "addresses", "users"
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "items"
+  add_foreign_key "carts", "users"
 end
