@@ -3,7 +3,6 @@ class AddressesController < ApplicationController
   before_action :set_address
 
   def edit
-    @address = current_address
   end
 
   def update
@@ -18,6 +17,6 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = current_address
+    @address = current_user_address
   end
 end

@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_address
+  def current_user_address
     if current_user.address.present?
       @address = current_user.address
     else
-      @address = Address.create(user_id: current_user.id)
+      @address = Address.new(user_id: current_user.id)
     end
   end
 end

@@ -9,12 +9,12 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       product: 商品
-    attiributes:
+    attributes:
       product:
         name: 商品名
         image: 商品画像
         price: 価格
-        description: 詳細
+        description: 説明
         hidden: 非表示
         display_order: 表示順
   date:

@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   end
   resource  :cart, only: [:show]
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations"}
-  resource  :user do
-    resource :address, only: [:edit, :update]
-  end
+  resource  :address, only: [:edit, :update]
   resources :orders, only: [:create]
 
   post   '/add_item',    to: "cart_items#create"
