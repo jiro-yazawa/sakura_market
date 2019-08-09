@@ -2,8 +2,8 @@
   .col-3.float-left
     = render 'users/show', user: current_user
 .col-9.float-right
-  - @items.each_with_index do |item, index|
+  - @products.each do |product|
     .card.float-left{style: "width: 18em"}
       = image_tag("banana.jpg", {class: "card-img-top"}) 
       .card-body
-        = link_to item.name, item_path(item)
+        = link_to product.name, product

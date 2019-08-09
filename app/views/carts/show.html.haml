@@ -3,8 +3,8 @@
 %table.table.table-hover
   %thead.thead-default
     %tr
-      %th= Item.human_attribute_name(:name)
-      %th= Item.human_attribute_name(:price)
+      %th= Product.human_attribute_name(:name)
+      %th= Product.human_attribute_name(:price)
       %th= Cart.human_attribute_name(:quantity)
       %th
   %tbody
@@ -14,4 +14,42 @@
         %td= item.item.price
         %td= item.quantity
         %td= link_to '削除', delete_item_path(item_id: item.item_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
-= link_to "注文内容を確認する", confirm_purchase_path, class: "btn btn-primary btn-lg btn-block"
+
+= simple_form_for @purchase do |f|
+  %table.table.table-hover
+    %tbody
+      %tr
+        %td 小計
+        %td= cart_items_subtotal
+        %td
+        %td
+        = f.hidden_field :subtotal, value: cart_items_subtotal
+      %tr
+        %td 税金
+        %td 0
+        %td
+        %td
+        = f.hidden_field :subtotal, value: 0
+      %tr
+        %td 送料
+        %td 0
+        %td
+        %td
+      %tr
+        %td 代引き手数料
+        %td 0
+        %td
+        %td
+        = f.hidden_field :subtotal, value: 0
+      %tr
+        %td 合計
+        %td= cart_items_subtotal
+        %td
+        %td
+        = f.hidden_field :subtotal, value: cart_items_subtotal
+      %tr
+        %td
+        %td= f.submit "商品を購入する", class: "btn btn-primary btn-lg btn-block"
+        %td
+        %td
+        

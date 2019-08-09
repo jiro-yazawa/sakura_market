@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe PurchasesController, type: :controller do
+RSpec.describe ProductsController, type: :controller do
 
-  describe "GET #new" do
+  describe "GET #index" do
     it "returns http success" do
-      get :new
+      get :index
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #create" do
+  describe "GET #show" do
     it "returns http success" do
-      get :create
+      get :show
       expect(response).to have_http_status(:success)
     end
   end

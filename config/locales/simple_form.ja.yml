@@ -11,7 +11,7 @@ ja:
     error_notification:
       default_message: "Please review the problems below:"
     labels:
-      item:
+      product:
         name: 商品名
         image: 商品画像
         price: 価格

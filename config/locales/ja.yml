@@ -7,8 +7,10 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      product: 商品
     attiributes:
-      item:
+      product:
         name: 商品名
         image: 商品画像
         price: 価格

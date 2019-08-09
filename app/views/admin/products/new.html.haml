@@ -1,0 +1,27 @@
+%h1 商品登録画面
+
+= simple_form_for(@product, method: :post, url: admin_products_path) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :image
+    = f.text_field :image, class: 'form-control'
+  .form-group
+    = f.label :price
+    = f.text_field :price, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control'
+  .form-group.form-check
+    = f.check_box :hidden, class: 'form-check-input'
+    = f.label :hidden, class: 'form-check-label'
+  .form-group
+    = f.label :display_order
+    = f.select :display_order, [(1..10)]
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
