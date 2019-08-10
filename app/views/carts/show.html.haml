@@ -25,28 +25,29 @@
         %td
         = f.hidden_field :subtotal, value: cart_items_subtotal
       %tr
-        %td 税金
-        %td= (cart_items_subtotal * Tax.where("active_date_begin <= ?", Date.today).where("? <= active_date_end", Date.today).first.rate.to_f).to_i
+        %td 代引き手数料
+        %td= cash_on_delivery(@cart) 
         %td
         %td
-        = f.hidden_field :subtotal, value: (cart_items_subtotal * Tax.where("active_date_begin <= ?", Date.today).where("? <= active_date_end", Date.today).first.rate.to_f).to_i
+        = f.hidden_field :cash_on_delivery, value: cash_on_delivery(@cart)
       %tr
         %td 送料
         %td= delivery_fee(@cart)
         %td
         %td
+        = f.hidden_field :delivery_fee, value: delivery_fee(@cart)
       %tr
-        %td 代引き手数料
-        %td 0
+        %td 税金
+        %td= tax_fee(@cart)
         %td
         %td
-        = f.hidden_field :subtotal, value: 0
+        = f.hidden_field :tax_fee, value: tax_fee(@cart)
       %tr
         %td 合計
-        %td= cart_items_subtotal
+        %td= total_price(@cart)
         %td
         %td
-        = f.hidden_field :subtotal, value: cart_items_subtotal
+        = f.hidden_field :total_price, value: total_price(@cart) # TODO: このあたり全てcart モデルに実装
       %tr
         %td
         %td= f.submit "商品を購入する", class: "btn btn-primary btn-lg btn-block"

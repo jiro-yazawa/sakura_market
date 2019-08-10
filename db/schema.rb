@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_093501) do
+ActiveRecord::Schema.define(version: 2019_08_10_093502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(version: 2019_08_10_093501) do
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "cash_on_deliveries", force: :cascade do |t|
+    t.integer "fee"
+    t.integer "orders_total_price_begin"
+    t.integer "orders_total_price_end"
   end
 
   create_table "items", force: :cascade do |t|
