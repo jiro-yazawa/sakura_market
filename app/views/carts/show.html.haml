@@ -26,13 +26,13 @@
         = f.hidden_field :subtotal, value: cart_items_subtotal
       %tr
         %td 税金
-        %td 0
+        %td= (cart_items_subtotal * Tax.where("active_date_begin <= ?", Date.today).where("? <= active_date_end", Date.today).first.rate.to_f).to_i
         %td
         %td
-        = f.hidden_field :subtotal, value: 0
+        = f.hidden_field :subtotal, value: (cart_items_subtotal * Tax.where("active_date_begin <= ?", Date.today).where("? <= active_date_end", Date.today).first.rate.to_f).to_i
       %tr
         %td 送料
-        %td 0
+        %td= delivery_fee(@cart)
         %td
         %td
       %tr
