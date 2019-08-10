@@ -20,6 +20,8 @@
             = link_to "お買い物", products_path, {class: "nav-link"}
           - if current_user
             %li.nav-item
+              = link_to "注文履歴", orders_path, class: "nav-link"
+            %li.nav-item
               = link_to "ショッピングカート", cart_path, class: "nav-link"
             %li.nav-item
               = link_to "商品を登録する", new_admin_product_path, {class: "nav-link"}
