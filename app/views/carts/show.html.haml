@@ -10,12 +10,12 @@
   %tbody
     - @cart.cart_items.each do |item|
       %tr
-        %td= link_to item.item.name, item_path(item.item_id)
-        %td= item.item.price
+        %td= link_to item.product.name, product_path(item.product_id)
+        %td= item.product.price
         %td= item.quantity
-        %td= link_to '削除', delete_item_path(item_id: item.item_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
+        %td= link_to '削除', delete_item_path(product_id: item.product_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
 
-= simple_form_for @purchase do |f|
+= simple_form_for @order do |f|
   %table.table.table-hover
     %tbody
       %tr

@@ -4,7 +4,7 @@ class CartItemsController < ApplicationController
 
   def create
     if @cart_item.blank?
-      @cart_item = current_cart.cart_items.build(item_id: params[:item_id], quantity: 0)
+      @cart_item = current_user_cart.cart_items.new(product_id: params[:product_id], quantity: 0)
     end
 
     @cart_item.quantity += params[:quantity].to_i
@@ -20,7 +20,6 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
-    @cart_item = current_cart.cart_items.find_by(item_id: params[:item_id])
     @cart_item.destroy!
     redirect_to cart_url, notice: "商品をカートから削除しました。"
   end
@@ -28,7 +27,7 @@ class CartItemsController < ApplicationController
   private 
 
   def set_up_cart_item
-    @cart_item = current_cart.cart_items.find_by(item_id: params[:item_id])
+    @cart_item = current_user_cart.cart_items.find_by(product_id: params[:product_id])
   end
 
 end
