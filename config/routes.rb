@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resource  :cart, only: [:show]
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations"}
   resource  :address, only: [:edit, :update]
-  resources :orders, only: [:index, :show, :create]
+  resources :orders, only: [:index, :show, :new, :create]
 
   post   '/add_item',    to: "cart_items#create"
   patch  '/update_item', to: "cart_items#update"

@@ -1,4 +1,4 @@
-
+%h2 ショッピングカート
 .mb-3
 %table.table.table-hover
   %thead.thead-default
@@ -8,49 +8,10 @@
       %th= Cart.human_attribute_name(:quantity)
       %th
   %tbody
-    - @cart.cart_items.each do |item|
+    - @cart.cart_items.each_with_index do |item, index|
       %tr
         %td= link_to item.product.name, product_path(item.product_id)
         %td= item.product.price
         %td= item.quantity
         %td= link_to '削除', delete_item_path(product_id: item.product_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
-
-= simple_form_for @order do |f|
-  %table.table.table-hover
-    %tbody
-      %tr
-        %td 小計
-        %td= cart_items_subtotal
-        %td
-        %td
-        = f.hidden_field :subtotal, value: cart_items_subtotal
-      %tr
-        %td 代引き手数料
-        %td= cash_on_delivery(@cart) 
-        %td
-        %td
-        = f.hidden_field :cash_on_delivery, value: cash_on_delivery(@cart)
-      %tr
-        %td 送料
-        %td= delivery_fee(@cart)
-        %td
-        %td
-        = f.hidden_field :delivery_fee, value: delivery_fee(@cart)
-      %tr
-        %td 税金
-        %td= tax_fee(@cart)
-        %td
-        %td
-        = f.hidden_field :tax_fee, value: tax_fee(@cart)
-      %tr
-        %td 合計
-        %td= total_price(@cart)
-        %td
-        %td
-        = f.hidden_field :total_price, value: total_price(@cart) # TODO: このあたり全てcart モデルに実装
-      %tr
-        %td
-        %td= f.submit "商品を購入する", class: "btn btn-primary btn-lg btn-block"
-        %td
-        %td
-        
+= link_to '注文画面へ', new_order_path, class: 'btn btn-primary'

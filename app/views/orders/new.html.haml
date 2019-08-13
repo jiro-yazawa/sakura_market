@@ -1,2 +1,39 @@
-%h1 Orders#new
-%p Find me in app/views/orders/new.html.haml
+%h1 注文画面
+= simple_form_for(@order, url: :orders) do |f|
+  %table.table.table-hover
+    %tbody
+      %tr
+        %td 小計
+        %td
+        %td
+        %td
+        = f.hidden_field :subtotal, value: 0
+      %tr
+        %td 代引き手数料
+        %td \ = cash_on_delivery(@cart)
+        %td
+        %td
+        = f.hidden_field :cash_on_delivery, value: 0
+      %tr
+        %td 送料
+        %td \ = delivery_fee(@cart)
+        %td
+        %td
+        = f.hidden_field :delivery_fee, value: 0
+      %tr
+        %td 税金
+        %td \ = tax_fee(@cart)
+        %td
+        %td
+        = f.hidden_field :tax_fee, value: 0
+      %tr
+        %td 合計
+        %td \ = total_price(@cart)
+        %td
+        %td
+        = f.hidden_field :total_price, value: 0 # total_price(@cart) # TODO: このあたり全てcart モデルに実装
+  %table.table.table-hover
+    = f.fields_for :order_details do |order_detail|
+      %tr
+        %td
+  = f.submit "商品を購入する", class: "btn btn-primary btn-lg btn-block"

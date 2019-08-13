@@ -1,6 +1,17 @@
 %h1 注文履歴
-- @orders.each do |order|
-  %p= link_to order.id, orders_path
-  %p= order.user_name
-  %p= order.user_location
-  %p= order.total_price
+.mb-3
+%table.table.table-hover
+  %thead.thead-default
+    %tr
+      %th 注文番号
+      %th 合計料金
+      %th 配達日
+      %th 配達時間帯
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= link_to order.id, order
+        %td= order.total_price
+        %td= order.delivery_date
+        %td= order.delivery_timezone
+

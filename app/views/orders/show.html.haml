@@ -1,0 +1,17 @@
+%h1 注文履歴の詳細
+
+.mb-3
+%table.table.table-hover
+  %thead.thead-default
+    %tr
+      %th= OrderItem.human_attribute_name(:name)
+      %th= OrderItem.human_attribute_name(:image)
+      %th= OrderItem.human_attribute_name(:price)
+      %th= OrderItem.human_attribute_name(:quantity)
+  %tbody
+    - @order.order_items.each do |item|
+      %tr
+        %td= link_to item.name, product_path(id: item.product_id)
+        %td= item.image
+        %td= item.price
+        %td= item.quantity
