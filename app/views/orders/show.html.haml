@@ -4,14 +4,14 @@
 %table.table.table-hover
   %thead.thead-default
     %tr
-      %th= OrderItem.human_attribute_name(:name)
-      %th= OrderItem.human_attribute_name(:image)
-      %th= OrderItem.human_attribute_name(:price)
-      %th= OrderItem.human_attribute_name(:quantity)
+      %th= OrderDetail.human_attribute_name(:name)
+      %th= OrderDetail.human_attribute_name(:image)
+      %th= OrderDetail.human_attribute_name(:price)
+      %th= OrderDetail.human_attribute_name(:quantity)
   %tbody
-    - @order.order_items.each do |item|
+    - @order.order_details .each do |detail|
       %tr
-        %td= link_to item.name, product_path(id: item.product_id)
-        %td= item.image
-        %td= item.price
-        %td= item.quantity
+        %td= link_to detail.product.name, product_path(id: detail.product_id)
+        %td= detail.product.image
+        %td= detail.unit_price
+        %td= detail.quantity
