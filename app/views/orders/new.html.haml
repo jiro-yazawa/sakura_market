@@ -33,6 +33,12 @@
         %td
         = f.hidden_field :total_price, value: @order.total_price
   %table.table.table-hover
+    %tbody
+      %tr
+        %td= f.select :delivery_date, delivery_date_list
+        %td= f.select :delivery_timezone, ['8-12', '12-14', '14-16', '16-18', '18-20', '20-21']
+  %table.table.table-hover
+    %tbody
     - @order_details.each do |order_detail|
       %tr
         %td= order_detail.product.name

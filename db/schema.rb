@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_212458) do
+ActiveRecord::Schema.define(version: 2019_08_15_213542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_212458) do
     t.integer "tax_fee"
     t.integer "cash_on_delivery"
     t.integer "delivery_fee"
-    t.datetime "delivery_date"
+    t.date "delivery_date"
     t.string "delivery_timezone"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
