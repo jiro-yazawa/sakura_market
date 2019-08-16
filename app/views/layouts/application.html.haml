@@ -23,8 +23,11 @@
               = link_to "注文履歴", orders_path, class: "nav-link"
             %li.nav-item
               = link_to "ショッピングカート", cart_path, class: "nav-link"
-            %li.nav-item
-              = link_to "商品を登録する", new_admin_product_path, {class: "nav-link"}
+            - if current_user.admin?
+              %li.nav-item
+                = link_to "商品を登録する", new_admin_product_path, {class: "nav-link"}
+              %li.nav-item
+                = link_to "ユーザー管理", admin_users_path, {class: "nav-link"}
             %li.nav-item
               = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
           - else

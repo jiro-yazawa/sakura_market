@@ -1,0 +1,19 @@
+%h1 ユーザー一覧
+
+%table.table.table_hover
+  %thead.thead-default
+    %tr
+      %th ユーザー名
+      %th 送付先住所
+      %th メールアドレス
+      %th パスワード
+      %th
+      %th
+  - @users.each do |user|
+    %tr
+      %td= user.address.name
+      %td= user.address.location
+      %td= user.email
+      %td= user.password
+      %td= link_to 'ログイン情報の編集' ,edit_user_registration_path, class: 'btn btn-primary'
+      %td= link_to '配送先情報の編集' ,edit_admin_user_address_path(user_id: user.id), class: 'btn btn-secondary' 
