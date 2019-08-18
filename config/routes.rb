@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root to: "products#index"
   resources :products, only: [:index, :show]
   namespace :admin do
-    resources :products, only: [:new, :edit, :create, :update, :destroy]
+    resources :products, only: [:new, :edit, :create, :update, :destroy] do
+      member do
+        get :move
+      end
+    end
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       resource :address, only: %i(edit update destroy)
     end

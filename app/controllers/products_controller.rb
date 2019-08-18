@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :admin_user, only: [:new, :create, :destoroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.order(:position)
   end
 
   def show

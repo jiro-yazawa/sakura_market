@@ -3,7 +3,4 @@
     = render 'users/show', user: current_user
 .col-9.float-right
   - @products.each do |product|
-    .card.float-left{style: "width: 18em"}
-      = image_tag("banana.jpg", {class: "card-img-top"}) 
-      .card-body
-        = link_to product.name, product
+    = render 'products_list', product: product

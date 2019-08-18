@@ -1,6 +1,7 @@
 class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user
+  before_action :set_product, only: [:destroy, :move]
 
   def new
     @product = Product.new
@@ -16,9 +17,21 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy!
     redirect_to root_url, notice: "商品「#{@product.name}」を削除しました。"
+  end
+
+  def move
+    case params[:move]
+    when 'up'
+      @product.move_higher
+      @target = @product.lower_item
+    when 'down'
+      @product.move_lower
+      @target = @product.higher_item
+    else
+      return head :ok
+    end
   end
 
   private
@@ -28,9 +41,13 @@ class Admin::ProductsController < ApplicationController
   end
 
   def admin_user
-    if !current_user.admin?
+    unless current_user.admin?
       redirect_to root_url
     end
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 
 end
