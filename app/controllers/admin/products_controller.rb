@@ -1,6 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :admin_user
+  before_action :authenticate_user!, :admin_user
   before_action :set_product, only: [:destroy, :move]
 
   def new
@@ -36,14 +35,12 @@ class Admin::ProductsController < ApplicationController
 
   private
 
-  def product_params
-    params.require(:product).permit(:name, :image, :price, :description, :hidden, :display_order)
+  def admin_user
+    redirect_to root_url unless current_user.admin?
   end
 
-  def admin_user
-    unless current_user.admin?
-      redirect_to root_url
-    end
+  def product_params
+    params.require(:product).permit(:name, :image, :price, :description, :hidden)
   end
 
   def set_product
