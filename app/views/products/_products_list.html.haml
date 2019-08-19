@@ -2,6 +2,6 @@
   = image_tag("banana.jpg", {class: "card-img-top"})
   .card-body
     = link_to product.name, product
-    - if current_user && current_user.admin?
+    - if current_user&.admin?
       = link_to '◀︎', move_admin_product_path(id: product.id, move: 'up'), remote: true
       = link_to '▶︎', move_admin_product_path(id: product.id, move: 'down'), remote: true
