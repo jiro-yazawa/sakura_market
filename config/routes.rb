@@ -8,11 +8,10 @@ Rails.application.routes.draw do
     put    '/update_item', to: "cart_items#update"
     delete '/delete_item', to: "cart_items#destroy"  
   end
-  resources :user, only: [:show, :edit, :update] do
+  resources :orders, only: [:index, :show, :new, :create]
+  resource :user, only: [:edit, :update] do
     resource :address, only: [:edit, :update]
   end
-
-  resources :orders, only: [:index, :show, :new, :create]
 
   namespace :admin do
     resources :products, only: [:new, :edit, :create, :update, :destroy] do

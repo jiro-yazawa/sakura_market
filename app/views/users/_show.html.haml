@@ -1,4 +1,4 @@
 %p= user.email
-%p= link_to 'プロフィールを編集する', '#'
-%p= link_to '配送先を編集する', edit_user_address_path(user_id: user.id)
+%p= link_to 'プロフィールを編集する', edit_user_path
+%p= link_to '配送先を編集する', edit_user_address_path
 %p= link_to 'ログイン情報を編集する', edit_user_registration_path
