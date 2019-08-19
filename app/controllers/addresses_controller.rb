@@ -17,6 +17,6 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = current_user_address
+    @address = current_user.address
   end
 end

@@ -8,6 +8,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    render 'users/registrations/edit'
   end
 
   def update

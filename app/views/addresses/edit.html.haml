@@ -1,6 +1,6 @@
 %h1 配送情報を編集する
 
-= simple_form_for(@address, method: :patch, url: address_path) do |f|
+= simple_form_for(@address, method: :patch, url: user_address_path) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
   .form-group

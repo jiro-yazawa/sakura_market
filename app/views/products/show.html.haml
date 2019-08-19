@@ -24,7 +24,7 @@
       %th= Product.human_attribute_name(:hidden)
       %td= @product.hidden
     %tr
-      %th= Product.human_attribute_name(:display_order)
-      %td= @product.display_order
+      %th= Product.human_attribute_name(:position)
+      %td= @product.position
       
-= button_to "カートに追加する", add_item_path(product_id: @product.id, quantity: 1), class: "btn btn-primary btn-lg btn-block"
+= button_to "カートに追加する", add_item_cart_path(product_id: @product.id, quantity: 1), class: "btn btn-primary btn-lg btn-block"

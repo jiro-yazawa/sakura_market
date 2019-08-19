@@ -20,8 +20,10 @@
 - ショッピングカートに商品を追加: POST: `/cart/add_item`
 - ショッピングカートの商品を編集: POST: `/cart/update_item`
 - ショッピングカートの商品を削除: POST: `/cart/delete_item`
+- 注文画面を表示: GET: `/orders/new`
 - 注文一覧を表示: GET: `/orders`
 - 注文詳細を表示: GET: `/orders/:id`
+- 注文を新規登録: POST: `/orders`
 
 ### 管理者
 
