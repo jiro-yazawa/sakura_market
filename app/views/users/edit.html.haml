@@ -1,2 +1,10 @@
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+%h1 ユーザー情報を編集する
+
+= simple_form_for(@user, method: :patch, url: user_path) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+  .form-group
+    = f.label :name
+    = f.text_field :name, value: @user.name, class: 'form-control'
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
