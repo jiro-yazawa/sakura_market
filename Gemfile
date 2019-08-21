@@ -71,3 +71,4 @@ gem 'factory_bot_rails'
 gem 'acts_as_list'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'carrierwave', '~> 2.0'
+gem "nokogiri", ">= 1.10.4"
