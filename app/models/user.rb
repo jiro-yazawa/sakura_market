@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   after_create :create_user_address
+  mount_uploader :image, ImagesUploader
 
   private
 
