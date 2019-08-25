@@ -20,11 +20,16 @@
     %tr
       %th= Product.human_attribute_name(:description)
       %td= @product.description
-    %tr
-      %th= Product.human_attribute_name(:hidden)
-      %td= @product.hidden
+    - if current_user&.admin?
+      %tr
+        %th= Product.human_attribute_name(:hidden)
+        %td= @product.hidden
     %tr
       %th= Product.human_attribute_name(:position)
       %td= @product.position
-      
-= button_to "カートに追加する", add_item_cart_path(product_id: @product.id, quantity: 1), class: "btn btn-primary btn-lg btn-block"
+    %tr
+      %th カートに入れる個数を選択
+      %td= select_tag 'quantity', options_for_select(1..10)
+      = hidden_field_tag 'product_id', @product.id
+
+= button_to "カートに追加する", add_item_cart_path, class: "btn btn-primary btn-lg btn-block"
