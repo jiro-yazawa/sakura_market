@@ -21,10 +21,8 @@ class CartItemsController < ApplicationController
   private 
 
   def set_up_cart_item
-    @cart_item = current_user.cart.cart_items.find_or_initialize_by(product_id: params[:product_id])
-    unless @cart_item.quantity.zero?
-      @cart_item.quantity += params[:quantity].to_i
-    end
+    @cart_item = current_user.cart.cart_items.find_or_initialize_by(product_id: params[:cart_item][:product_id])
+    @cart_item.quantity += params[:cart_item][:quantity].to_i
   end
 
 end

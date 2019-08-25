@@ -3,33 +3,35 @@
   - if current_user&.admin?
     = link_to "この商品を削除する", admin_product_path(@product), method: :delete, class: "nav-link"
   = link_to "一覧", root_path, class: "nav-link"
-%table.table.table-hover
-  %tbody
-    %tr
-      %th= Product.human_attribute_name(:id)
-      %td= @product.id
-    %tr
-      %th= Product.human_attribute_name(:name)
-      %td= @product.name
-    %tr
-      %th= Product.human_attribute_name(:image)
-      %td= image_tag("banana.jpg", {width: "300px", height: "200px"})
-    %tr
-      %th= Product.human_attribute_name(:price)
-      %td= @product.price
-    %tr
-      %th= Product.human_attribute_name(:description)
-      %td= @product.description
-    - if current_user&.admin?
-      %tr
-        %th= Product.human_attribute_name(:hidden)
-        %td= @product.hidden
-    %tr
-      %th= Product.human_attribute_name(:position)
-      %td= @product.position
-    %tr
-      %th カートに入れる個数を選択
-      %td= select_tag 'quantity', options_for_select(1..10)
-      = hidden_field_tag 'product_id', @product.id
 
-= button_to "カートに追加する", add_item_cart_path, class: "btn btn-primary btn-lg btn-block"
+= simple_form_for :cart_item, method: :post, url: add_item_cart_path do |f|
+  %table.table.table-hover
+    %tbody
+      %tr
+        %th= Product.human_attribute_name(:id)
+        %td= @product.id
+      %tr
+        %th= Product.human_attribute_name(:name)
+        %td= @product.name
+      %tr
+        %th= Product.human_attribute_name(:image)
+        %td= image_tag("banana.jpg", {width: "300px", height: "200px"})
+      %tr
+        %th= Product.human_attribute_name(:price)
+        %td= @product.price
+      %tr
+        %th= Product.human_attribute_name(:description)
+        %td= @product.description
+      - if current_user&.admin?
+        %tr
+          %th= Product.human_attribute_name(:hidden)
+          %td= @product.hidden
+      %tr
+        %th= Product.human_attribute_name(:position)
+        %td= @product.position
+      %tr
+        %th カートに入れる個数を選択
+        %td= f.select :quantity, options_for_select(1..10)
+        = f.hidden_field :product_id, value: @product.id
+  
+  = f.submit "カートに追加する", class: "btn btn-primary btn-lg btn-block"
