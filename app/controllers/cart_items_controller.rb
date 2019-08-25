@@ -1,12 +1,7 @@
 class CartItemsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_up_cart_item
+  before_action :authenticate_user!, :set_up_cart_item
 
   def create
-    if @cart_item.blank?
-      @cart_item = current_user.cart.cart_items.new(product_id: params[:product_id], quantity: 0)
-    end
-
     @cart_item.quantity += params[:quantity].to_i
     if @cart_item.save!
       @notice = "カートに追加しました。"
@@ -27,7 +22,7 @@ class CartItemsController < ApplicationController
   private 
 
   def set_up_cart_item
-    @cart_item = current_user.cart.cart_items.find_by(product_id: params[:product_id])
+    @cart_item = current_user.cart.cart_items.find_or_initialize_by(product_id: params[:product_id])
   end
 
 end
