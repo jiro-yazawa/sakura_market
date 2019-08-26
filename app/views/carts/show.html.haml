@@ -13,6 +13,6 @@
         %td= link_to item.product.name, product_path(item.product_id)
         %td= item.product.price
         %td= item.quantity
-        %td= link_to '削除', delete_item_cart_path("cart_item[product_id]": item.product_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
+        %td= link_to '削除', cart_item_path("cart_item[product_id]": item.product_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
 - unless @cart.cart_items.blank?
   = link_to '注文画面へ', new_order_path, class: 'btn btn-primary'

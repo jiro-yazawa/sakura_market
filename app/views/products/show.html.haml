@@ -4,7 +4,7 @@
     = link_to "この商品を削除する", admin_product_path(@product), method: :delete, class: "nav-link"
   = link_to "一覧", root_path, class: "nav-link"
 
-= simple_form_for :cart_item, method: :post, url: add_item_cart_path do |f|
+= simple_form_for :cart_item, method: :post, url: cart_item_path do |f|
   %table.table.table-hover
     %tbody
       %tr

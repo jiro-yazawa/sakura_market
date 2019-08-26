@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
   root "products#index"
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations"}
-  resources :products, only: [:index, :show]
-  resource  :cart, only: [:show] do
-    post   '/add_item',    to: "cart_items#create"
-    patch  '/update_item', to: "cart_items#update"
-    put    '/update_item', to: "cart_items#update"
-    delete '/delete_item', to: "cart_items#destroy"  
-  end
+  resource :cart, only: [:show]
+  resource :cart_item, only: [:create, :update, :destroy]
   resources :orders, only: [:index, :show, :new, :create]
+  resources :products, only: [:index, :show]
   resource :user, only: [:edit, :update] do
     resource :address, only: [:edit, :update]
   end
