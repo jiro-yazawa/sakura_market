@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     @order.user_name = current_user.address.name
     @order.user_location = current_user.address.location
     if @order.save
-      # TODO ショッピングカートを空にする
+      current_user.cart.clear_items
       redirect_to root_url, notice: '注文に成功しました。'
     else
       redirect_to cart_url, notice: '注文に失敗しました。'
