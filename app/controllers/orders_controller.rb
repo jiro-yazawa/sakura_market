@@ -25,6 +25,8 @@ class OrdersController < ApplicationController
     end
   end
 
+  private
+
   def order_params
     params.require(:form_order).permit(Form::Order::REGISTRABLE_ATTRIBUTES + [order_details_attributes: Form::OrderDetail::REGISTRABLE_ATTRIBUTES])
   end
