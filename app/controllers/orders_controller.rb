@@ -16,10 +16,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Form::Order.new(order_params)
-    # TODO コントローラー側でやるべきではない
-    @order.user_id = current_user.id
-    @order.user_name = current_user.address.name
-    @order.user_location = current_user.address.location
+    @order.set_user_params(current_user)
     if @order.save
       current_user.cart.clear_items
       redirect_to root_url, notice: '注文に成功しました。'
