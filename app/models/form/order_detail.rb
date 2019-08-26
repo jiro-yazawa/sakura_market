@@ -8,7 +8,7 @@ class Form::OrderDetail < OrderDetail
   end
 
   # FIXME: 変数名(item -> detail)
-  def set_order_item_attributes(cart_item)
+  def set_order_detail_attributes(cart_item)
     self.product_id = cart_item.product.id
     self.unit_price = cart_item.product.price
     self.quantity = cart_item.quantity

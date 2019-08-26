@@ -11,7 +11,7 @@ class Form::Order < Order
 
   def set_order_details(cart)
     cart.cart_items.each do |cart_item|
-      self.order_details.build.set_order_item_attributes(cart_item)
+      self.order_details.build.set_order_detail_attributes(cart_item)
     end
     self.order_details
   end

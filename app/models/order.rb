@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   end
 
   def cash_on_delivery
-    CashOnDelivery.where("orders_total_price_begin <= ?", subtotal).where("? <= orders_total_price_end", subtotal).first.fee
+    CashOnDelivery.where("orders_total_price_begin <= ? AND ? <= orders_total_price_end", subtotal, subtotal).first.fee
   end
 
   def delivery_fee
@@ -17,17 +17,26 @@ class Order < ApplicationRecord
     if self.order_details.size.zero?
       0
     else
-      total_quantity = self.order_details.inject(0) { |sum, order_item| sum + order_item.quantity}
       base_fee + (total_quantity / 5) * base_fee
     end
   end
   
   def tax_fee
-    sum = subtotal + cash_on_delivery + delivery_fee
-    (sum * Tax.where("active_date_begin <= ?", Date.today).where("? <= active_date_end", Date.today).first.rate.to_f).to_i
+    now = Date.today
+    (amount_without_tax * Tax.where("active_date_begin <= ? AND ? <= active_date_end", now, now).first.rate.to_f).to_i
   end
 
   def total_price
-    subtotal + cash_on_delivery + delivery_fee + tax_fee
+    amount_without_tax + tax_fee
+  end
+
+  private
+
+  def amount_without_tax
+    subtotal + cash_on_delivery + delivery_fee
+  end
+
+  def total_quantity
+    self.order_details.inject(0) { |sum, order_item| sum + order_item.quantity}
   end
 end
