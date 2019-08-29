@@ -4,9 +4,9 @@
 %table.table.table-hover
   %thead.thead-default
     %tr
-      %th= OrderDetail.human_attribute_name(:name)
-      %th= OrderDetail.human_attribute_name(:image)
-      %th= OrderDetail.human_attribute_name(:price)
+      %th= Product.human_attribute_name(:name)
+      %th= Product.human_attribute_name(:image)
+      %th= Product.human_attribute_name(:price)
       %th= OrderDetail.human_attribute_name(:quantity)
   %tbody
     - @order.order_details .each do |detail|
