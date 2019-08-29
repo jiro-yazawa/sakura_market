@@ -9,4 +9,8 @@ module OrdersHelper
     end
     delivery_date_list
   end
+
+  def delivery_timezone_select_options
+    ['8-12', '12-14', '14-16', '16-18', '18-20', '20-21']
+  end
 end

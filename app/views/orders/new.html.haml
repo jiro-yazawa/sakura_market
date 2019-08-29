@@ -36,7 +36,7 @@
     %tbody
       %tr
         %td= f.select :delivery_date, delivery_date_list
-        %td= f.select :delivery_timezone, ['8-12', '12-14', '14-16', '16-18', '18-20', '20-21']
+        %td= f.select :delivery_timezone, delivery_timezone_select_options
   %table.table.table-hover
     %tbody
     - @order_details.each do |order_detail|
