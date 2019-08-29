@@ -1,5 +1,4 @@
 class Admin::AddressesController < ApplicationController
-  before_action :set_user
   before_action :set_address
 
   def show
@@ -10,7 +9,7 @@ class Admin::AddressesController < ApplicationController
 
   def update
     @address.update(user_address_params)
-    redirect_to admin_users_url, notice: "ユーザー「#{@user.address.name}」の配送先情報を更新しました。"
+    redirect_to admin_users_url, notice: "ユーザー「#{@address.name}」の配送先情報を更新しました。"
   end
 
   def destroy
@@ -22,11 +21,7 @@ class Admin::AddressesController < ApplicationController
     params.require(:address).permit(:user_id, :name, :location)
   end
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
-
   def set_address
-    @address = @user.address
+    @address = User.find(params[:user_id]).address
   end
 end
