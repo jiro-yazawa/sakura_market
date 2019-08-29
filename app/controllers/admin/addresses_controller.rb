@@ -1,5 +1,5 @@
 class Admin::AddressesController < ApplicationController
-  before_action :set_address
+  before_action :set_address, :admin_user
 
   def show
   end
@@ -16,7 +16,11 @@ class Admin::AddressesController < ApplicationController
   end
 
   private
-  
+
+  def admin_user
+    redirect_to root_url unless current_user.admin?
+  end
+
   def user_address_params
     params.require(:address).permit(:user_id, :name, :location)
   end

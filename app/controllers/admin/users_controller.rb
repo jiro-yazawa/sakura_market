@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :admin_user
   before_action :set_user, only: [:show, :edit, :update, :destory]
   def index
     @users = User.all
@@ -8,7 +9,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    render 'users/registrations/edit'
   end
 
   def update
@@ -22,8 +22,12 @@ class Admin::UsersController < ApplicationController
 
   private
 
+  def admin_user
+    redirect_to root_url unless current_user.admin?
+  end
+
   def user_params
-    params.require(:user).permit(:email, :password, :admin)
+    params.require(:user).permit(:name, :image)
   end
 
   def set_user
