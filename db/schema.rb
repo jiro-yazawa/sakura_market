@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_053026) do
+ActiveRecord::Schema.define(version: 2019_09_01_213338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,23 @@ ActiveRecord::Schema.define(version: 2019_08_21_053026) do
     t.integer "fee"
     t.integer "orders_total_price_begin"
     t.integer "orders_total_price_end"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "note_id"
+    t.text "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_comments_on_note_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -99,6 +116,8 @@ ActiveRecord::Schema.define(version: 2019_08_21_053026) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "users"
+  add_foreign_key "comments", "notes"
+  add_foreign_key "notes", "users"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
 end
