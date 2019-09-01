@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.recent
   end
 
   def show
@@ -10,15 +10,13 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.new
-    @order_details = @order.set_order_details(current_user.cart)
+    @order_details = @order.build_order_details(current_user.cart)
   end
 
   def create
     @order = current_user.orders.new(order_params)
-    @order.set_user_params(current_user)
     if @order.save
-      current_user.cart.clear_items
-      redirect_to root_url, notice: '注文に成功しました。'
+      redirect_to orders_url, notice: '注文に成功しました。'
     else
       redirect_to cart_url, notice: '注文に失敗しました。'
     end

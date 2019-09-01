@@ -4,7 +4,7 @@ class CartItemsController < ApplicationController
   before_action :set_cart_item, only: [:update, :destroy]
 
   def create
-    if @cart_item.save!
+    if @cart_item.save
       @notice = "カートに追加しました。"
     else
       @notice = "カートに追加できませんでした。"
@@ -12,8 +12,8 @@ class CartItemsController < ApplicationController
     redirect_to cart_url, notice: @notice
   end
 
-  def update
-  end
+  # def update
+  # end
 
   def destroy
     @cart_item.destroy!

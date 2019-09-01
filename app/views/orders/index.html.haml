@@ -5,6 +5,8 @@
     %tr
       %th 注文番号
       %th 合計料金
+      %th 宛先
+      %th 配送先
       %th 配達日
       %th 配達時間帯
   %tbody
@@ -12,6 +14,8 @@
       %tr
         %td= link_to order.id, order
         %td= order.total_price
+        %td= order.user_name
+        %td= order.user_location
         %td= order.delivery_date
         %td= order.delivery_timezone
 
