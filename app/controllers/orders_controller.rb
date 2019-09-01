@@ -9,12 +9,12 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Form::Order.new
+    @order = current_user.orders.new
     @order_details = @order.set_order_details(current_user.cart)
   end
 
   def create
-    @order = Form::Order.new(order_params)
+    @order = current_user.orders.new(order_params)
     @order.set_user_params(current_user)
     if @order.save
       current_user.cart.clear_items
@@ -27,7 +27,9 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:form_order).permit(Form::Order::REGISTRABLE_ATTRIBUTES + [order_details_attributes: Form::OrderDetail::REGISTRABLE_ATTRIBUTES])
+    params.require(:order).permit(
+        :delivery_date, :delivery_timezone, order_details_attributes: [:product_id, :unit_price, :quantity, :subtotal]
+    )
   end
 
 end
