@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_action :authenticate_user!, :set_address
+  before_action :set_address
 
   def edit
   end
