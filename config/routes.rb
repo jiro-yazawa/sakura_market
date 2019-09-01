@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root "products#index"
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations"}
-  resource :cart, only: [:show]
+  resource :cart, only: [:show] do
+    # TODO: URLレビュー依頼 (rails routes | grep cart_item)
+    resources :cart_items, only: [:update, :destroy]
+  end
   resources :orders, only: [:index, :show, :new, :create]
   resources :products, only: [:index, :show] do
-    resources :cart_items, only: [:create, :update, :destroy]
+    resources :cart_items, only: [:create]
   end
   resource :user, only: [:edit, :update] do
     resource :address, only: [:edit, :update]

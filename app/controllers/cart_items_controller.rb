@@ -1,5 +1,7 @@
 class CartItemsController < ApplicationController
-  before_action :authenticate_user!, :set_up_cart_item
+  before_action :authenticate_user!, :set_cart
+  before_action :set_up_cart_item, only: [:create]
+  before_action :set_cart_item, only: [:update, :destroy]
 
   def create
     if @cart_item.save!
@@ -20,9 +22,21 @@ class CartItemsController < ApplicationController
 
   private 
 
+  def cart_item_params
+    params.require(:cart_item).permit(:quantity)
+  end
+
+  def set_cart
+    @cart = current_user.cart
+  end
+
+  def set_cart_item
+    @cart_item = @cart.cart_items.find(params[:id])
+  end
+
   def set_up_cart_item
-    @cart_item = current_user.cart.cart_items.find_or_initialize_by(product_id: params[:cart_item][:product_id])
-    @cart_item.quantity += params[:cart_item][:quantity].to_i
+    @cart_item = @cart.cart_items.find_or_initialize_by(product_id: params[:product_id])
+    @cart_item.inc_quantity(cart_item_params[:quantity])
   end
 
 end

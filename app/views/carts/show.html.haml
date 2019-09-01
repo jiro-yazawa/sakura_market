@@ -8,11 +8,11 @@
       %th= Cart.human_attribute_name(:quantity)
       %th
   %tbody
-    - @cart.cart_items.each do |item|
+    - @cart.cart_items.each do |cart_item|
       %tr
-        %td= link_to item.product.name, product_path(item.product_id)
-        %td= item.product.price
-        %td= item.quantity
-        %td= link_to '削除', cart_item_path("cart_item[product_id]": item.product_id), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
+        %td= link_to cart_item.product.name, product_path(cart_item.product_id)
+        %td= cart_item.product.price
+        %td= cart_item.quantity
+        %td= link_to '削除', cart_cart_item_path(cart_item), method: :delete, data: { confirm: "カートから商品を削除します。よろしいですか？" }, class: 'btn btn-danger'
 - unless @cart.cart_items.blank?
   = link_to '注文画面へ', new_order_path, class: 'btn btn-primary'

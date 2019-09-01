@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @cart_item = current_user.cart.cart_items.build
   end
 
 end
