@@ -3,7 +3,8 @@ class User < ApplicationRecord
   has_one :address, dependent: :destroy
   has_many :comments
   has_many :orders
-  
+  has_many :notes
+
   after_create :create_user_address, :create_user_cart
 
   devise :database_authenticatable, :registerable,

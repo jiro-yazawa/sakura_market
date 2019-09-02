@@ -1,2 +1,15 @@
-%h1 Notes#new
-%p Find me in app/views/notes/new.html.haml
+%h1 新しい日記を書く
+
+= simple_form_for(@note, url: user_notes_path) do |f|
+  .form-group
+    = f.label :title, "タイトル"
+    = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :contents, "本文"
+    = f.text_area :contents, class: "form-control"
+  .form-group
+    = image_tag @note.image.to_s
+    = f.label :image, "日記に画像を添付する"
+    = f.file_field :image, value: @note.image
+  .form-actions
+    = f.button :submit, class: "btn btn-primary"

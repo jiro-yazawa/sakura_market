@@ -1,2 +1,18 @@
-%h1 Notes#index
-%p Find me in app/views/notes/index.html.haml
+- if current_user
+  .col-3.float-left
+    = render 'users/show', user: current_user
+.col-9.float-right
+  - @notes.each do |note|
+    .note-wrapper
+      %div{id: "note-#{note.id}"}
+        .note-header
+          = image_tag note.user.image.to_s, class: "note-user-image"
+          .note-title= note.title
+          .note-user-name= note.user.name
+        .note-body
+          = image_tag note.image.to_s, class: "note-image"
+          .note-contents= note.contents
+        .note-footer.clearfix
+          - if note.user == current_user
+            = link_to "削除", user_note_path(note), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "note-delete-link"
+

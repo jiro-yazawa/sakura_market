@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
-  root "products#index"
+  root "notes#index"
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users/registrations"}
   resource :cart, only: [:show] do
     # TODO: URLレビュー依頼 (rails routes | grep cart_item)
     resources :cart_items, only: [:update, :destroy]
   end
+  resources :notes, only: [:index]
   resources :orders, only: [:index, :show, :new, :create]
   resources :products, only: [:index, :show] do
     resources :cart_items, only: [:create]
   end
-  resources :users, only: [:edit, :update] do
+  resource :user, only: [:edit, :update] do
     resource :address, only: [:edit, :update]
-    resources :notes do
-      resources :comments, only: [:index, :new, :edit, :create, :update, :destroy]
-    end
+    resources :notes, only: [:new, :create, :destroy]
   end
 
   namespace :admin do

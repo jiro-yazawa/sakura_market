@@ -1,3 +1,50 @@
 // Place all the styles related to the Notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.note-contents {
+
+}
+
+.note-delete-link {
+  float: right;
+}
+
+.note-footer {
+  padding: 10px;
+}
+
+.note-footer-trash-icon {
+  float: right;
+}
+
+.note-image {
+  max-width: 400px;
+}
+
+.note-title {
+  margin: 0 0 0 60px;
+  font-weight: bold;
+}
+
+.note-user-image {
+  width: 50px;
+  border-radius: 50%;
+  float: left;
+}
+
+.note-user-name {
+
+}
+
+.note-wrapper {
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 20px;
+}

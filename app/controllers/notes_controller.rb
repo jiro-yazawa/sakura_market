@@ -1,22 +1,35 @@
 class NotesController < ApplicationController
+  before_action :set_note, only: [:show, :edit, :update, :destroy]
+
   def index
+    @notes = Note.all.recent
   end
 
   def new
-  end
-
-  def show
-  end
-
-  def edit
+    @note = current_user.notes.build
   end
 
   def create
-  end
-
-  def update
+    @note = current_user.notes.build(note_params)
+    if @note.save
+      redirect_to note_url(@note), notice: "日記を作成しました。"
+    else
+      render :new, notice: "日記を作成できませんでした。"
+    end
   end
 
   def destroy
+    @note.destroy!
+    redirect_to root_url, notice: "日記を削除しました。"
+  end
+
+  private
+
+  def note_params
+    params.require(:note).permit(:title, :contents, :image)
+  end
+
+  def set_note
+    @note = current_user.notes.find(params[:id])
   end
 end
