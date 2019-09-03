@@ -3,9 +3,9 @@
 %table.table.table-hover
   %thead.thead-default
     %tr
-      %th= Product.human_attribute_name(:name)
-      %th= Product.human_attribute_name(:price)
-      %th= Cart.human_attribute_name(:quantity)
+      %th 商品名
+      %th 価格
+      %th 個数
       %th
   %tbody
     - @cart.cart_items.recent.each do |cart_item|
