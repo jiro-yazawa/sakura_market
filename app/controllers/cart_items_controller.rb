@@ -5,11 +5,10 @@ class CartItemsController < ApplicationController
 
   def create
     if @cart_item.save
-      @notice = "カートに追加しました。"
+      redirect_to cart_url, notice: "カートに追加しました。"
     else
-      @notice = "カートに追加できませんでした。"
+      redirect_to product_url(@cart_item.product), notice: "カートに追加できませんでした。"
     end
-    redirect_to cart_url, notice: @notice
   end
 
   # def update

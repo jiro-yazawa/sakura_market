@@ -4,11 +4,7 @@ class CartItem < ApplicationRecord
   attribute :quantity, :integer, default: 0
 
   def inc_quantity(quantity)
-    if self.quantity.zero?
-      self.quantity = quantity.to_i
-    else
-      self.quantity += quantity.to_i
-    end
+    self.quantity += quantity.to_i
   end
 
 end
