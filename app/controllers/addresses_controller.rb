@@ -5,8 +5,11 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address.update!(address_params)
-    redirect_to root_url, notice: "配送情報を編集しました。"
+    if @address.update(address_params)
+      redirect_to root_url, notice: "配送情報を編集しました。"
+    else
+      render :edit, notice: "配送情報を編集できませんでした。"
+    end
   end
 
   private
