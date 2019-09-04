@@ -6,5 +6,5 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
-  scope :showable, -> { where(hidden: false) }
+  scope :visible, -> { where(hidden: false) }
 end

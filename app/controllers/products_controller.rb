@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     if current_user&.admin?
       @products = Product.all.order(:position)
     else
-      @products = Product.showable.order(:position)
+      @products = Product.visible.order(:position)
     end
   end
 
