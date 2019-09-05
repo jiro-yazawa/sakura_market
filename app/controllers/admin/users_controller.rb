@@ -13,6 +13,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     @user.update!(user_params)
+    redirect_to admin_users_url, notice: "ユーザー「#{@user.name}」の情報を更新しました。"
   end
 
   def destroy
