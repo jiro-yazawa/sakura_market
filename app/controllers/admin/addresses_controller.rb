@@ -1,4 +1,4 @@
-class Admin::AddressesController < ApplicationController
+class Admin::AddressesController < Admin::ApplicationController
   before_action :set_address
 
   def edit
