@@ -19,6 +19,6 @@ class Admin::AddressesController < Admin::ApplicationController
   end
 
   def set_address
-    @address = User.find(params[:user_id]).address
+    @address = Address.find(user: params[:user_id])
   end
 end
