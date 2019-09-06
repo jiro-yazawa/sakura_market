@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         get :move
       end
     end
-    resources :users, only: [:index, :show, :edit, :update, :destroy] do
+    resources :users, only: [:index, :edit, :update, :destroy] do
       resource :address, only: [:edit, :update]
     end
   end

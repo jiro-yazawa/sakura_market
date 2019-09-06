@@ -1,5 +1,4 @@
 class Admin::ProductsController < Admin::ApplicationController
-  before_action :authenticate_user!
   before_action :set_product, only: [:destroy, :move]
 
   def new
