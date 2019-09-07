@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     # TODO: URLレビュー依頼 (rails routes | grep cart_item)
     resources :cart_items, only: [:update, :destroy]
   end
-  resources :notes, only: [:index]
+  resources :notes, only: [:index] # do
+    # resources :comments
+  # end
   resources :orders, only: [:index, :show, :new, :create]
   resources :products, only: [:index, :show] do
     resources :cart_items, only: [:create]
