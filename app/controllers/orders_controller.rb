@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-        :delivery_date, :delivery_timezone, order_details_attributes: [:product_id, :unit_price, :quantity, :subtotal]
+        :delivery_date, :delivery_timezone
     )
   end
 
