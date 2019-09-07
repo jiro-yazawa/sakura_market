@@ -2,16 +2,12 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    if current_user&.admin?
-      @products = Product.all.order(:position)
-    else
-      @products = Product.visible.order(:position)
-    end
+    @products = Product.visible
   end
 
   def show
     @product = Product.find(params[:id])
-    @cart_item = current_user.cart.cart_items.build
+    @cart_item = CartItem.new
   end
 
 end

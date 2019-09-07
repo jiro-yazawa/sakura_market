@@ -1,0 +1,6 @@
+- if current_user
+  .col-3.float-left
+    = render 'users/show', user: current_user
+.col-9.float-right
+  - @products.each do |product|
+    = render 'products/products_list', product: product

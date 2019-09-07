@@ -17,7 +17,10 @@
           %li.nav-item
             = link_to "日記を見る", notes_path, {class: "nav-link"}
           %li.nav-item
-            = link_to "お買い物", products_path, {class: "nav-link"}
+            - if current_user&.admin?
+              = link_to "お買い物", admin_products_path, {class: "nav-link"}
+            - else
+              = link_to "お買い物", products_path, {class: "nav-link"}
           - if current_user
             %li.nav-item
               = link_to "注文履歴", orders_path, class: "nav-link"

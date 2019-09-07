@@ -1,6 +1,10 @@
 class Admin::ProductsController < Admin::ApplicationController
   before_action :set_product, only: [:destroy, :move]
 
+  def index
+    @products = Product.position_order
+  end
+
   def new
     @product = Product.new
   end

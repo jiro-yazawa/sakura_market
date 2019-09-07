@@ -6,5 +6,6 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
-  scope :visible, -> { where(hidden: false) }
+  scope :position_order, -> {order(:position)}
+  scope :visible, -> {where(hidden: false).position_order}
 end
