@@ -5,8 +5,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update!(user_params)
+    if @user.update(user_params)
       redirect_to edit_user_url, notice: 'ユーザー情報を更新しました。'
+    else
+      render :edit, notice: 'ユーザー情報を更新できませんでした。'
     end
   end
 
