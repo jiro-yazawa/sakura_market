@@ -39,7 +39,7 @@
         %td= f.select :delivery_timezone, delivery_timezone_select_options
   %table.table.table-hover
     %tbody
-    - @order_details.each do |order_detail|
+    - @order.order_details.each do |order_detail|
       %tr
         %td= order_detail.product.name
         %td= order_detail.unit_price

@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :order_details, allow_destroy: true
 
+  after_initialize :build_order_details
   before_save :set_user_params
   after_save :clear_cart_items
 
@@ -35,18 +36,18 @@ class Order < ApplicationRecord
     amount_without_tax + tax_fee
   end
 
-  def build_order_details(cart)
-    cart.cart_items.each do |cart_item|
-      self.order_details.build.set_order_detail_attributes(cart_item)
-    end
-    self.order_details
-  end
-
   def total_quantity
     self.order_details.inject(0) { |sum, order_item| sum + order_item.quantity}
   end
 
   private
+
+  def build_order_details
+    self.user.cart.cart_items.each do |cart_item|
+      self.order_details.build.set_order_detail_attributes(cart_item)
+    end
+    self.order_details
+  end
 
   def clear_cart_items
     self.user.cart.clear_items

@@ -9,12 +9,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = current_user.orders.new
-    @order_details = @order.build_order_details(current_user.cart)
+    @order = current_user.orders.build
   end
 
   def create
-    @order = current_user.orders.new(order_params)
+    @order = current_user.orders.build(order_params)
     if @order.save
       redirect_to orders_url, notice: '注文に成功しました。'
     else
