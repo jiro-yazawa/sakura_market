@@ -14,5 +14,5 @@
           .note-contents= note.contents
         .note-footer.clearfix
           - if note.user == current_user
-            = link_to "削除", user_note_path(note), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "note-delete-link"
+            = link_to "削除", note_path(note), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "note-delete-link"
 

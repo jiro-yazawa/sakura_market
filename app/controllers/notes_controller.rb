@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:destroy]
 
   def index
-    @notes = Note.all.recent
+    @notes = Note.recent
   end
 
   def new
@@ -12,7 +12,7 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.build(note_params)
     if @note.save
-      redirect_to note_url(@note), notice: "日記を作成しました。"
+      redirect_to notes_url, notice: "日記を作成しました。"
     else
       render :new, notice: "日記を作成できませんでした。"
     end
@@ -30,6 +30,6 @@ class NotesController < ApplicationController
   end
 
   def set_note
-    @note = current_user.notes.find(params[:id])
+    @note = Note.find(params[:id])
   end
 end

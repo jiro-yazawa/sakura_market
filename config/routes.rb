@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     # TODO: URLレビュー依頼 (rails routes | grep cart_item)
     resources :cart_items, only: [:update, :destroy]
   end
-  resources :notes, only: [:index] # do
+  resources :notes, only: [:index, :new, :create, :destroy] # do
     # resources :comments
   # end
   resources :orders, only: [:index, :show, :new, :create]
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
   resource :user, only: [:edit, :update] do
     resource :address, only: [:edit, :update]
-    resources :notes, only: [:new, :create, :destroy]
+    # resources :notes, only: [:new, :create, :destroy] '/user/notes/new' になるのに違和感
   end
 
   namespace :admin do

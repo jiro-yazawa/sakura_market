@@ -1,6 +1,6 @@
 %h1 新しい日記を書く
 
-= simple_form_for(@note, url: user_notes_path) do |f|
+= simple_form_for(@note, url: notes_path) do |f|
   .form-group
     = f.label :title, "タイトル"
     = f.text_field :title, class: "form-control"
