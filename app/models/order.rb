@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :order_details, allow_destroy: true
 
+  # TODO これをやることで注文画面からパラメータを投げる必要がなくなってしまったが、OK？
   after_initialize :build_order_details,
                    :calc_subtotal, :calc_cash_on_delivery, :calc_delivery_fee, :calc_tax_fee, :calc_total_price
   before_save :set_user_params
@@ -55,9 +56,8 @@ class Order < ApplicationRecord
   end
 
   def set_user_params
-    user = User.find(self.user.id)
-    self.user_name = user.address.name
-    self.user_location = user.address.location
+    self.user_name = self.user.address.name
+    self.user_location = self.user.address.location
   end
 
 end
