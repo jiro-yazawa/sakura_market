@@ -14,10 +14,10 @@ class User < ApplicationRecord
   private
 
   def create_user_address
-    self.address = Address.create(user_id: id)
+    self.create_address!
   end
 
   def create_user_cart
-    self.cart = Cart.create(user_id: id)
+    self.create_cart!
   end
 end
