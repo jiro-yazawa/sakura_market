@@ -1,5 +1,5 @@
 class OrderDetail < ApplicationRecord
-  belongs_to :order, dependent: :destroy
+  belongs_to :order
   belongs_to :product
 
   def set_order_detail_attributes(cart_item)
