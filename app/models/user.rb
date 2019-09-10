@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :notes
 
-  after_create :create_user_address, :create_user_cart
+  before_create :build_user_address, :build_user_cart
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -13,11 +13,11 @@ class User < ApplicationRecord
 
   private
 
-  def create_user_address
-    self.create_address!
+  def build_user_address
+    self.build_address
   end
 
-  def create_user_cart
-    self.create_cart!
+  def build_user_cart
+    self.build_cart
   end
 end
