@@ -15,7 +15,7 @@ class CartItem < ApplicationRecord
   private
 
   def integrate_quantity # TODO: ここレビューで見て欲しい！
-    others = self.class.where("cart_id = ? AND product_id = ?", self.cart, self.product)
+    others = self.class.where("cart_id = ? AND product_id = ?", cart, product)
     inc_quantity(others.inject(0) { |sum, cart_item| sum + cart_item.quantity})
     others.delete_all
   end
